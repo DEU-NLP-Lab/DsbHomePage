@@ -8,3 +8,6 @@ class Post(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
 
     # author: 추후 작성 예정
+    
+    def __str__(self):
+        return f'[{self.pk}] {self.title}'  # 해당 포스트의 pk 값과 해당 포스트의 title 값
