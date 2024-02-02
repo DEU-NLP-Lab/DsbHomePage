@@ -132,21 +132,13 @@
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <ul class="navbar-nav mr-auto">
                         <li class="nav-item active">
-                            <a class="nav-link" href="/post">홈<span class="sr-only">(current)</span></a>
+                          <a class="nav-link" href="/">홈<span class="sr-only">(current)</span></a>
                         </li>
-                        <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
-                               data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                활동 사진
-                            </a>
-                            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                <a class="dropdown-item" href="#">1기 활동 사진</a>
-                                <a class="dropdown-item" href="#">2기 활동 사진</a>
-                                <a class="dropdown-item" href="#">3기 활동 사진</a>
-                                <a class="dropdown-item" href="#">4기 활동 사진</a>
-                                <div class="dropdown-divider"></div>
-                                <a class="dropdown-item" href="#">아직 아무것도 아님</a>
-                            </div>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/picture/">활동 사진<span class="sr-only">(current)</span></a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">모집 신청하기<span class="sr-only">(current)</span></a>
                         </li>
                     </ul>
                     <!-- <form class="form-inline my-2 my-lg-0">
@@ -160,7 +152,7 @@
         <!-- 컨테이너 생성 -->
         <div class="container my-3">
             <img class="container my-3" src="{% static '/image/logo/logo.jpg' %}" alt=""/>
-            <h1 class="my-3">　</h1>
+            <h6 class="my-3">　</h6>
 
             <div class="container">
                 <input name="id" type="hidden" value="{{id}}"/>

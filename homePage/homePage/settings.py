@@ -36,7 +36,8 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'post'  # 게시판 앱 추가  ** 앱 추가 후 반드시 python manage.py makemigrations 후 python manage.py migrate 해야 db 적용
+    'post',  # 게시판 앱 추가  ** 앱 추가 후 반드시 python manage.py makemigrations 후 python manage.py migrate 해야 db 적용
+    'picture',  # 활동 사진 앱 추가
 ]
 
 MIDDLEWARE = [
@@ -115,7 +116,7 @@ USE_TZ = False
 STATIC_URL = '/static/'
 
 MEDIA_URL = '/media/'
-MEDIA_ROOT = os.path.join(BASE_DIR, '_media')
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.0/ref/settings/#default-auto-field
