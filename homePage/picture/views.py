@@ -11,6 +11,18 @@ def picture_post(request):
         request,
         'picture/picture_post.html',
         {
-            'posts': picture
+            'pictures': picture
+        },
+    )
+
+
+def picture_detail_page(request, pk):
+    picture = Picture.objects.get(pk=pk)
+
+    return render(
+        request,
+        'picture/picture_detail_page.html',
+        {
+            'picture': picture
         },
     )

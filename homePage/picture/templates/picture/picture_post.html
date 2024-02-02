@@ -167,10 +167,10 @@
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
               <ul class="navbar-nav mr-auto">
                 <li class="nav-item active">
-                  <a class="nav-link" href="/homePage/picture/static">홈<span class="sr-only">(current)</span></a>
+                  <a class="nav-link" href="../">홈<span class="sr-only">(current)</span></a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="/picture">활동 사진<span class="sr-only">(current)</span></a>
+                    <a class="nav-link" href="../picture">활동 사진<span class="sr-only">(current)</span></a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="#">모집 신청하기<span class="sr-only">(current)</span></a>
@@ -187,29 +187,32 @@
           <!-- 컨테이너 생성 -->
           <div class="container my-3">
             <img class="container my-3" src="{% static '/image/logo/logo.jpg' %}" alt=""/>
+            <hr/>
             <h6 class="my-3">　</h6>
-
             <!-- 카드 표 -->
             <div class="album py-5 bg-light">
               <div class="container">
                 <div class="row">
 
-                  <!-- 이 부분 반복해서 카드 만들기 -->
-                  <div class="col-md-4">
-                    <div class="card mb-4 shadow-sm">
-                      <svg class="bd-placeholder-img card-img-top" width="100%" height="225" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice" focusable="false" role="img" aria-label="Placeholder: Thumbnail"><title>Placeholder</title><rect width="100%" height="100%" fill="#55595c"/><text x="50%" y="50%" fill="#eceeef" dy=".3em">Thumbnail</text></svg>
-                      <div class="card-body">
-                        <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-                        <div class="d-flex justify-content-between align-items-center">
-                          <div class="btn-group">
-                            <button type="button" class="btn btn-sm btn-outline-secondary">View</button>
-                            <button type="button" class="btn btn-sm btn-outline-secondary">Edit</button>
-                          </div>
-                          <small class="text-muted">9 mins</small>
+                    <!-- 이 부분 반복해서 카드 만들기 -->
+                    {% for p in pictures %}
+
+                    <div class="col-md-4">
+                        <div class="card mb-4 shadow-sm">
+                            <img class="card-img-top" src="{{ p.image.url }}" alt="Card image cap" />
+                            <div class="card-body">
+                                <p class="card-text">{{ p.content }}</p>
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <div class="btn-group">
+                                        <button type="button" class="btn btn-sm btn-outline-secondary"><a href="{{p.pk}}">자세히 보기</a></button>
+                                    </div>
+<!--                                    <small class="text-muted">{{ p.created_at }}</small>-->
+                                    <small class="text-muted">{{ p.updated_at }}</small>
+                                </div>
+                            </div>
                         </div>
-                      </div>
                     </div>
-                  </div>
+                    {% endfor %}
 
 
 
@@ -217,37 +220,18 @@
               </div>
             </div>
 
-            <h6 class="my-3">　</h6>
-
-            <table class="table">
-              <thead>
-              <tr>
-                  <th scope="col">게시글 번호</th>
-                  <th scope="col">제목</th>
-                  <th scope="col">내용</th>
-              </tr>
-              </thead>
-              <tbody>
-              {% for p in posts %}
-                  <tr>
-                      <th scope="row" style="text-align: center;">{{ p.pk }}</th>
-                      <td><a href="/{{p.pk}}">{{ p.title }}</a></td>
-                      <td>{{ p.content }}</td>
-                  </tr>
-              {% endfor %}
-              </tbody>
-            </table>
           </div>
 
 
         <!-- site info -->
         <footer class="text-muted mt-auto">
           <div class="container">
+            <hr/>
             <p class="float-right">
               <a href="#">Back to top</a>
             </p>
             <p>Copyrightⓒ 2024 Dong-eui University All Rights Reserved</p>
-            <p><a href="https://www.deu.ac.kr/www">동의대학교 - 부산광역시 부산진구 엄광로 176 (가야동)</a></p>
+            <p><a href="https://www.deu.ac.kr/www" target="_blank">동의대학교 - 부산광역시 부산진구 엄광로 176 (가야동)</a></p>
           </div>
         </footer>
 
