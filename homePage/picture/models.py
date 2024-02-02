@@ -6,7 +6,7 @@ from django.db import models
 class Picture(models.Model):
     title = models.CharField(max_length=30)
     content = models.TextField()
-    image = models.ImageField(upload_to='pictures/image/%Y/%m/%d', blank=True)
+    image = models.ImageField(upload_to='pictures/image/%Y/%m/%d', blank=False)
 
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
