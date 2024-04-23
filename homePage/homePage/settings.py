@@ -38,6 +38,8 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'post',  # 게시판 앱 추가  ** 앱 추가 후 반드시 python manage.py makemigrations 후 python manage.py migrate 해야 db 적용
     'picture',  # 활동 사진 앱 추가
+    'ckeditor',  # Text Editor
+    'ckeditor_uploader',  # Text Editor
 ]
 
 MIDDLEWARE = [
@@ -122,3 +124,7 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 # https://docs.djangoproject.com/en/5.0/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+# 관리자 페이지 글자 편집기
+CKEDITOR_UPLOAD_PATH = 'uploads/'
+CKEDITOR_IMAGE_BACKEND = "pillow"
