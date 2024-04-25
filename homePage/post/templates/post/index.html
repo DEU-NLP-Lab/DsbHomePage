@@ -87,23 +87,13 @@
 
                 <ul class="my-4">
                     <div class="col-span-1">
-                        <div class="relative">
-                            <!-- 슬라이드 이미지 -->
+                        <div class="relative" style="min-height: 500px;">
+                            <!-- 이미지 슬라이드가 있는 경우 -->
                             {% for p in picture %}
                                 <div class="slide">
-                                    <img class="w-full" src="{{ p.image.url }}" alt="이벤트 이미지">
+                                    <img class="w-full" src="{{ p.image.url }}" alt="활동 이미지">
                                 </div>
                             {% endfor %}
-{#                            <div class="slide">#}
-{#                                <img class="w-full" src="https://source.unsplash.com/featured/?university,event" alt="이벤트 이미지">#}
-{#                            </div>#}
-{#                            <div class="slide">#}
-{#                                <img class="w-full" src="https://source.unsplash.com/featured/?university,seminar" alt="세미나 이미지">#}
-{#                            </div>#}
-{#                            <div class="slide">#}
-{#                                <img class="w-full" src="https://source.unsplash.com/featured/?university,graduation" alt="졸업식 이미지">#}
-{#                            </div>#}
-
                             <!-- 이전/다음 버튼 -->
                             <a class="absolute top-1/2 left-0 transform -translate-y-1/2 bg-blue-500 text-white p-1 cursor-pointer" onclick="moveSlide(-1)">&#10094;</a>
                             <a class="absolute top-1/2 right-0 transform -translate-y-1/2 bg-blue-500 text-white p-1 cursor-pointer" onclick="moveSlide(1)">&#10095;</a>

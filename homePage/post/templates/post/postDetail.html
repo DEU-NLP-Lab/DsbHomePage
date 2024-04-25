@@ -53,28 +53,42 @@
         <h2 class="text-xl font-bold"></h2>
 
         <div class="my-3">
-                    <!-- Post content-->
-                    <article>
-                        <!-- Post header-->
-                        <header class="my-3">
-                            <!-- Post title-->
-                            <h1 class="fw-bolder my-3">{{post.title}}</h1>
-                            <hr/>
-                            <!-- Post meta content-->
-                            <div class="text-muted fst-italic my-3">{{ post.updated_at|default:post.created_at }}</div>
-                            <hr/>
-                            <h1 class="my-3">　</h1>
-                        </header>
-                        <!-- Preview image figure-->
-                        <figure class="my-3"><img class="rounded mx-auto d-block" src="{{ picture.image.url }}" alt="..." /></figure>
-                        <!-- Post content-->
-                        <section class="my-3">
-                            <p class="fs-5 mb-4">{{post.content|safe}}</p>
-                        </section>
-                    </article>
-                </div>
+            <!-- Post content-->
+            <article>
+                <!-- Post header-->
+                <header class="my-3">
+                    <!-- Post title-->
+                    <h1 class="fw-bolder my-3">{{post.title}}</h1>
+                    <hr/>
+                    <!-- Post meta content-->
+                    <div class="text-muted fst-italic my-3">{{ post.updated_at|default:post.created_at }}</div>
+                    <hr/>
+                    <h1 class="my-3">　</h1>
+                </header>
+                <!-- Post content-->
+                <section class="my-3">
+                    <p class="fs-5 mb-4">{{post.content|safe}}</p>
+                </section>
+            </article>
+        </div>
         <!-- 구분선 -->
         <hr class="my-2 border-gray-300" />
+        <div class="my-3">
+            <!-- Post content-->
+            <article>
+                <!-- Post header-->
+                <header class="my-3">
+                    <!-- Post title-->
+                    <h1 class="fw-bolder my-3 flex justify-end items-center">
+                        {% if post.file %}
+                            <a href="{% url 'download-post-file' post_id=post.id %}" class="px-6 py-3 bg-blue-500 hover:bg-blue-700 text-white font-semibold rounded-lg shadow transition duration-300 ease-in-out">
+                                첨부파일 : {{ post.get_file_name }}
+                            </a>
+                        {% endif %}
+                    </h1>
+                </header>
+            </article>
+        </div>
     </div>
 
     <footer class="bg-white">
