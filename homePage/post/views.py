@@ -1,17 +1,20 @@
 from django.shortcuts import render
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from .models import Post
+from picture.models import Picture
 
 
 # Create your views here.
 def index(request):
     posts = Post.objects.all().order_by('-pk')[:10]
+    pictures = Picture.objects.all()
 
     return render(
         request,
         'post/index.html',
         {
-            'posts': posts
+            'posts': posts,
+            'picture': pictures
         },
     )
 

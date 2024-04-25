@@ -37,7 +37,7 @@
             <!-- Navigation Links -->
             <a href="https://forms.gle/gJVS9kTaVgh4f4tt9" target="_blank" class="hover:bg-blue-700 px-3 py-2 rounded-md">모집 신청서</a>
             <a href="/posts" class="hover:bg-blue-700 px-3 py-2 rounded-md">공지사항</a>
-            <a href="#" class="hover:bg-blue-700 px-3 py-2 rounded-md">활동사진</a>
+            <a href="/picture" class="hover:bg-blue-700 px-3 py-2 rounded-md">활동사진</a>
             <a href="#" class="hover:bg-blue-700 px-3 py-2 rounded-md">결과물</a>
           </div>
           <!-- Mobile Menu Button -->
@@ -82,22 +82,27 @@
             <section class="container mx-auto">
                 <div class="flex items-center justify-between border-b-2 border-blue-800 pb-2">
                   <h2 class="text-2xl font-bold text-blue-800">활동 사진</h2>
-                  <a href="#" class="text-blue-600 hover:text-blue-800 float-right font-semibold">MORE +</a>
+                  <a href="/picture" class="text-blue-600 hover:text-blue-800 float-right font-semibold">MORE +</a>
                 </div>
 
                 <ul class="my-4">
                     <div class="col-span-1">
                         <div class="relative">
                             <!-- 슬라이드 이미지 -->
-                            <div class="slide">
-                                <img class="w-full" src="https://source.unsplash.com/featured/?university,event" alt="이벤트 이미지">
-                            </div>
-                            <div class="slide">
-                                <img class="w-full" src="https://source.unsplash.com/featured/?university,seminar" alt="세미나 이미지">
-                            </div>
-                            <div class="slide">
-                                <img class="w-full" src="https://source.unsplash.com/featured/?university,graduation" alt="졸업식 이미지">
-                            </div>
+                            {% for p in picture %}
+                                <div class="slide">
+                                    <img class="w-full" src="{{ p.image.url }}" alt="이벤트 이미지">
+                                </div>
+                            {% endfor %}
+{#                            <div class="slide">#}
+{#                                <img class="w-full" src="https://source.unsplash.com/featured/?university,event" alt="이벤트 이미지">#}
+{#                            </div>#}
+{#                            <div class="slide">#}
+{#                                <img class="w-full" src="https://source.unsplash.com/featured/?university,seminar" alt="세미나 이미지">#}
+{#                            </div>#}
+{#                            <div class="slide">#}
+{#                                <img class="w-full" src="https://source.unsplash.com/featured/?university,graduation" alt="졸업식 이미지">#}
+{#                            </div>#}
 
                             <!-- 이전/다음 버튼 -->
                             <a class="absolute top-1/2 left-0 transform -translate-y-1/2 bg-blue-500 text-white p-1 cursor-pointer" onclick="moveSlide(-1)">&#10094;</a>
