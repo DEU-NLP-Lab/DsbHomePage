@@ -1,204 +1,107 @@
 <!DOCTYPE html>
 {% load static %}
 <html lang="ko">
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <!--부트스트랩-->
-        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous">
-        <link class="container my-3" src="{% static '/picture/bootstrap/favicon.ico' %}" alt="" rel="icon" type="image/x-icon" />
-        <link class="container my-3" src="{% static '/picture/bootstrap/script.js' %}" alt=""/>
-        <link rel="stylesheet" class="container my-3" src="{% static '/picture/bootstrap/styles.css' %}" alt=""/>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>동의대학교 SW아카데미</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+      /* 추가 스타일 */
+      .nav-link:hover {
+            text-decoration: underline;
+      }
+      .slide {
+          display: none;
+          height: 500px; /* 이미지의 높이를 고정합니다. 필요에 따라 조절 가능합니다. */
+          background-size: cover; /* 이미지가 div의 크기에 맞게 조정됩니다. */
+          background-position: center; /* 이미지가 중앙에 위치하도록 합니다. */
+      }
 
-        <!-- 다크 모드 -->
-        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.0/css/all.css">
+      .slide img {
+          width: 100%;
+          height: 100%;
+          object-fit: cover; /* 이미지가 div에 맞춰 자르기 되도록 합니다. */
+      }
 
-        <style>
-            html, body{
-                width: 100%;
-                height: 100%;
-                margin: 0;
-                padding: 0;
-            }
-            .wrap{
-                width: 100%;
-                height: 100%;
-                display: flex;
-                justify-content: center;
-                align-items: center;
-            }
-            body[data-darkmode=on] {
-                background-color: #1e1f21;
-                color: #e8e8e8 !important;
-            }
-            /* Darkmode Toggle */
-            body[data-darkmode=on] .darkmode > .inner{
-                background-color: rgba(255,255,255,0.25);
-            }
-            .darkmode > .inner{
-                position: relative;
-                display: inline-flex;
-                padding: 5px;
-                border-radius: 1.5em;
-                background-color: rgba(0,0,0,0.1);
-            }
-            .darkmode label {
-                cursor: pointer;
-            }
-            .darkmode label:first-of-type{
-                padding: 5px 5px 5px 10px;
-                border-radius: 50% 0 0 50%;
-            }
-            .darkmode label:last-of-type{
-                padding: 5px 10px 5px 5px;
-                border-radius: 0 50% 50% 0;
-            }
-            .darkmode i{
-                font-size: 1.5em;
-                color: #aaa;
-            }
-            .darkmode input[type=radio]{
-                display: none;
-            }
-            .darkmode input[type=radio]:checked + label > i {
-                color: #fff;
-                transition: all 0.35s ease-in-out;
-            }
-            .darkmode .darkmode-bg{
-                width: 39px;
-                height: 34px;
-                position: absolute;
-                left: 5px;
-                border-radius: 50px 15px 15px 50px;
-                z-index: -1;
-                transition: all 0.35s ease-in-out;
-                background-color: #03a9f4;
-            }
-            #toggle-radio-dark:checked ~ .darkmode-bg{
-                border-radius: 15px 50px 50px 15px;
-                top: 5px;
-                left: 44px;
-            }
-        </style>
-        <script>
-            document.addEventListener('DOMContentLoaded', function(){
-                //다크모드 토글
-                if(document.querySelector('.darkmode')){
-                    if(localStorage.getItem("darkmode") == 'on'){
-                        //다크모드 켜기
-                        document.body.dataset.darkmode='on';
-                        document.querySelector('#toggle-radio-dark').checked = true;
-                    }
-                    //다크모드 이벤트 핸들러
-                    document.querySelector('.darkmode').addEventListener("click", e=>{
-                        if(e.target.classList.contains('todark')){
-                            document.body.dataset.darkmode='on';
-                            localStorage.setItem("darkmode", "on");
-                        }else if(e.target.classList.contains('tolight')){
-                            document.body.dataset.darkmode='off';
-                            localStorage.setItem("darkmode", "off");
-                        }
-                    },false);
-                }else{
-                    localStorage.removeItem("darkmode");
-                }
+      .centered-img {
+          display: block;
+          max-width: 1000px; /* 이미지의 최대 너비를 설정합니다. */
+          height: auto; /* 이미지의 높이를 자동으로 조절합니다. */
+          margin: 0 auto; /* 좌우 마진을 자동으로 설정하여 중앙 정렬합니다. */
+      }
+  </style>
+</head>
+<body>
+    <nav class="bg-blue-800 p-4 text-white">
+        <div class="container mx-auto flex justify-between items-center">
+          <a href="/" class="flex items-center">
+            <!-- Placeholder for the university logo -->
+            <div class="bg-blue-500 h-8 w-8 mr-3"></div>
+            <span class="font-bold text-2xl text-white-800">Dong-Eui University SW인재양성사업단</span>
+          </a>
+          <div class="hidden md:flex space-x-4">
+            <!-- Navigation Links -->
+            <a href="#" class="hover:bg-blue-700 px-3 py-2 rounded-md">모집 신청서</a>
+            <a href="#" class="hover:bg-blue-700 px-3 py-2 rounded-md">공지사항</a>
+            <a href="#" class="hover:bg-blue-700 px-3 py-2 rounded-md">활동사진</a>
+            <a href="#" class="hover:bg-blue-700 px-3 py-2 rounded-md">결과물</a>
+          </div>
+          <!-- Mobile Menu Button -->
+          <button class="md:hidden text-white focus:outline-none">
+            <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/>
+            </svg>
+          </button>
+        </div>
+      </nav>
 
-            })
-        </script>
-    </head>
-    <body class="d-flex flex-column min-vh-100">
-            <!-- 로고 밖으로 빼고 싶으면 이거 쓰기 -->
-<!--        <div class="container">-->
-<!--            <img class="container my-3" src="{% static '/image/logo/logo.jpg' %}" alt=""/>-->
-<!--        </div>-->
+    <div class="container mx-auto my-5 p-5 bg-white shadow-lg rounded">
+        <h2 class="text-xl font-bold"></h2>
 
-        <!-- 다크모트 기능 -->
-<!--        <div class="wrap">-->
-<!--            <div class="darkmode">-->
-<!--                <div class="inner">-->
-<!--                    <input type="radio" name="toggle" id="toggle-radio-light" checked><label for="toggle-radio-light" class="tolight"><i class="fas fa-sun tolight"></i></label>-->
-<!--                    <input type="radio" name="toggle" id="toggle-radio-dark"><label for="toggle-radio-dark" class="todark"><i class="fas fa-moon todark"></i></label>-->
-<!--                    <div class="darkmode-bg"></div>-->
-<!--                </div>-->
-<!--            </div>-->
-<!--        </div>-->
-
-<!-- 네비게이션 바 추가 -->
-        <nav class="navbar navbar-expand-lg navbar-light bg-light">
-            <div class="container">
-                <a class="navbar-brand" href="../">디지털스마트부산-동의대</a>
-                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
-                        aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-
-                <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                    <ul class="navbar-nav mr-auto">
-                        <li class="nav-item active">
-                          <a class="nav-link" href="../../">홈<span class="sr-only">(current)</span></a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="../../picture/">활동 사진<span class="sr-only">(current)</span></a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="#">모집 신청하기<span class="sr-only">(current)</span></a>
-                        </li>
-                    </ul>
-                    <!-- <form class="form-inline my-2 my-lg-0">
-                      <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-                      <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-                    </form> -->
-                </div>
-            </div>
-        </nav>
-
-
-
-        <!-- Page content-->
-        <div class="container my-3">
-            <div class="row">
-                <div class="my-3">
+        <div class="my-3">
                     <!-- Post content-->
                     <article>
                         <!-- Post header-->
                         <header class="my-3">
                             <!-- Post title-->
-                            <h1 class="fw-bolder my-3">{{picture.title}}</h1>
+                            <h1 class="fw-bolder my-3"><strong>{{picture.title}}</strong></h1>
                             <hr/>
                             <!-- Post meta content-->
-                            <div class="text-muted fst-italic my-3">{{picture.updated_at}}</div>
+                            <div class="text-muted fst-italic my-3">{{ picture.updated_at|default:picture.created_at }}</div>
                             <hr/>
                             <h1 class="my-3">　</h1>
                         </header>
                         <!-- Preview image figure-->
-                        <figure class="my-3"><img class="rounded mx-auto d-block" src="{{ picture.image.url }}" alt="..." /></figure>
+                        <figure class="my-3"><img class="rounded mx-auto d-block centered-img" src="{{ picture.image.url }}" alt="..." /></figure>
+                        <br/>
                         <!-- Post content-->
                         <section class="my-3">
-                            <p class="fs-5 mb-4">{{picture.content}}</p>
+                            <p class="fs-5 mb-4">{{picture.content|safe}}</p>
                         </section>
                     </article>
                 </div>
-                <div class="my-3 col-12">
-                    <a href="../" class="btn btn-primary float-right">뒤로가기</a>
-                </div>
+        <!-- 구분선 -->
+        <hr class="my-2 border-gray-300" />
+    </div>
+
+    <footer class="bg-white">
+        <div class="container mx-auto my-5 p-5 bg-white shadow-lg rounded">
+            <!-- 개인정보처리방침 링크 -->
+            <div class="py-2 text-left">
+                <a href="https://www.deu.ac.kr/www/content/61" class="text-sm text-blue-600 hover:text-blue-800" target="_blank" rel="noopener noreferrer">개인정보처리방침</a>
+            </div>
+
+            <!-- 구분선 -->
+            <hr class="my-2 border-gray-300" />
+
+            <!-- 푸터 텍스트 내용 -->
+            <div class="text-sm text-gray-600 text-left">
+                <span>47340 부산광역시 부산진구 엄광로 176 (가야동)</span><br>
+                <span>SW인재양성사업단 | Tel: 051-890-0000 | Mail: test@deu.ac.kr</span><br>
+                <span>Copyright© 2024 동의대학교 SW인재양성사업단 All Rights Reserved.</span>
             </div>
         </div>
-
-        <!-- site info -->
-        <footer class="text-muted mt-auto">
-            <div class="container">
-                <hr/>
-              <p class="float-right">
-                <a href="#">Back to top</a>
-              </p>
-              <p>Copyrightⓒ 2024 Dong-eui University All Rights Reserved</p>
-              <p><a href="https://www.deu.ac.kr/www" target="_blank">동의대학교 - 부산광역시 부산진구 엄광로 176 (가야동)</a></p>
-            </div>
-        </footer>
-
-        <!--부트스트랩-->
-        <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
-        <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.min.js" integrity="sha384-w1Q4orYjBQndcko6MimVbzY0tgp4pWB4lZ7lr30WKz0vr/aWKhXdBNmNb5D92v7s" crossorigin="anonymous"></script>
-    </body>
+    </footer>
+</body>
 </html>

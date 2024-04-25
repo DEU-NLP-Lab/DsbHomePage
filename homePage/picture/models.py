@@ -1,11 +1,14 @@
 from django.db import models
+from ckeditor_uploader.fields import RichTextUploadingField
 
 
 # Create your models here.
 
 class Picture(models.Model):
     title = models.CharField(max_length=30)
-    content = models.TextField()
+    # content = models.TextField()
+    content = RichTextUploadingField(blank=True, null=True, verbose_name='내용')
+
     image = models.ImageField(upload_to='pictures/image/%Y/%m/%d', blank=False)
 
     created_at = models.DateTimeField(auto_now_add=True)
