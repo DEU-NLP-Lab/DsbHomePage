@@ -162,3 +162,7 @@ homePage/.venv
 homePage/media/pictures/*
 homePage/media/uploads/*
 homePage/post/templates/post/index3.html
+homePage/db.sqlite3
+homePage/media/pictures/
+homePage/media/posts/files/
+homePage/media/uploads/
