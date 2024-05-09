@@ -37,7 +37,8 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'post',  # 게시판 앱 추가  ** 앱 추가 후 반드시 python manage.py makemigrations 후 python manage.py migrate 해야 db 적용
-    'picture',  # 활동 사진 앱 추가
+    'picture',  # 활동 사진 앱 추가,
+    'results',  # 결과물 사진 앱 추가
     'ckeditor',  # Text Editor
     'ckeditor_uploader',  # Text Editor
 ]
