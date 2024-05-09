@@ -5,6 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>동의대학교 SW아카데미</title>
+    <link rel="shortcut icon" type="image/x-icon" href="https://www.deu.ac.kr/Upload/www/favicon/2018/1213091943440.ico">
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
       /* 추가 스타일 */
@@ -29,13 +30,11 @@
     <nav class="bg-blue-800 p-4 text-white">
         <div class="container mx-auto flex justify-between items-center">
           <a href="/" class="flex items-center">
-            <!-- Placeholder for the university logo -->
-            <div class="bg-blue-500 h-8 w-8 mr-3"></div>
             <span class="font-bold text-2xl text-white-800">Dong-Eui University SW인재양성사업단</span>
           </a>
           <div class="hidden md:flex space-x-4">
             <!-- Navigation Links -->
-            <a href="https://forms.gle/gJVS9kTaVgh4f4tt9" target="_blank" class="hover:bg-blue-700 px-3 py-2 rounded-md">모집 신청서</a>
+            <a href="{{ form_link }}" target="_blank" class="hover:bg-blue-700 px-3 py-2 rounded-md">모집 신청서</a>
             <a href="/posts" class="hover:bg-blue-700 px-3 py-2 rounded-md">공지사항</a>
             <a href="/picture" class="hover:bg-blue-700 px-3 py-2 rounded-md">활동사진</a>
             <a href="#" class="hover:bg-blue-700 px-3 py-2 rounded-md">결과물</a>
@@ -50,6 +49,7 @@
       </nav>
     <div class="container mx-auto my-5 p-5 bg-white shadow-lg rounded">
         <div>
+{#            <img class="w-full" src="{% static '/image/logo/logo.jpg' %}" alt="로고 이미지"/>#}
             <img class="w-full" src="{% static '/image/logo/logo.jpg' %}" alt="로고 이미지"/>
         </div>
     </div>
@@ -115,7 +115,7 @@
                 <div class="bg-white p-4 shadow rounded-lg">
                     <div class="relative w-full h-96 flex justify-center items-center">
                         <!-- 유튜브 영상의 iframe. src 부분에 실제 유튜브 영상 링크를 넣어야 합니다. -->
-                        <iframe class="absolute" width="100%" height="100%" src="https://www.youtube.com/embed/5xLiE1loOEo" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                        <iframe class="absolute" width="100%" height="100%" src="https://www.youtube.com/embed/{{ youtube_link }}" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
                     </div>
                 </div>
             </section>
@@ -125,12 +125,10 @@
                 </div>
                 
                 <div class="bg-white p-4 shadow rounded-lg">
-                    <p class="text-sm text-gray-600 mb-4">
-                        부산광역시 부산진구 엄광로 176 (가야동) 동의대학교 중앙도서관 7층 SW전공인재양성사업단
-                    </p>
                     <div class="h-96 overflow-hidden"> <!-- 사진 크기가 커도 박스 크기 유지 -->
                         <!-- 실제 사진 URL로 src 속성을 대체해야 합니다. -->
-                        <img src="https://source.unsplash.com/featured/?university,graduation" alt="사진" class="w-full h-full object-cover" />
+{#                        <img src="https://source.unsplash.com/featured/?university,graduation" alt="사진" class="w-full h-full object-cover" />#}
+                        <img src="{% static '/image/location.PNG' %}" alt="사진" class="w-full h-full object-cover" />
                     </div>    
                 </div>   
             </section> 
@@ -150,7 +148,7 @@
             <!-- 푸터 텍스트 내용 -->
             <div class="text-sm text-gray-600 text-left">
                 <span>47340 부산광역시 부산진구 엄광로 176 (가야동)</span><br>
-                <span>SW인재양성사업단 | Tel: 051-890-0000 | Mail: test@deu.ac.kr</span><br>
+                <span>SW인재양성사업단 | Tel: 051-890-4266 | Mail: mej@deu.ac.kr</span><br>
                 <span>Copyright© 2024 동의대학교 SW인재양성사업단 All Rights Reserved.</span>
             </div>
         </div>

@@ -5,6 +5,7 @@ from .models import Post
 from picture.models import Picture
 from django.http import FileResponse, Http404
 from urllib.parse import quote  # 파일 이름을 URL 인코딩하기 위해
+from urllib.parse import urlparse, parse_qs
 
 
 # Create your views here.
@@ -12,12 +13,17 @@ def index(request):
     posts = Post.objects.all().order_by('-pk')[:10]
     pictures = Picture.objects.all()
 
+    youtube_link = read_youtube_link()
+    form_link = read_form_link()
+
     return render(
         request,
         'post/index.html',
         {
             'posts': posts,
-            'picture': pictures
+            'picture': pictures,
+            'youtube_link': youtube_link,
+            'form_link': form_link
         },
     )
 
@@ -38,11 +44,14 @@ def posts(request):
         'page_obj': page_obj,
     }
 
+    form_link = read_form_link()
+
     return render(
         request,
         'post/posts.html',
         {
             'posts': page_obj,
+            'form_link': form_link
         }
     )
 
@@ -50,11 +59,14 @@ def posts(request):
 def single_post_page(request, pk):
     post = Post.objects.get(pk=pk)
 
+    form_link = read_form_link()
+
     return render(
         request,
         'post/postDetail.html',
         {
             'post': post,
+            'form_link': form_link
         }
     )
 
@@ -85,3 +97,23 @@ def download_post_file(request, post_id):
         return response
     else:
         return Http404("File does not exist")
+
+
+def read_youtube_link():
+    with open('linkSetting/youtube.txt', 'r', encoding="utf-8") as file:
+        url = file.read().split('\n')[-1].strip()
+
+    # URL에서 쿼리 파라미터 추출
+    parsed_url = urlparse(url)
+
+    query_params = parse_qs(parsed_url.query)
+
+    # 'v' 파라미터 값 반환
+    return query_params.get('v', [None])[0]
+
+
+def read_form_link():
+    with open('linkSetting/form.txt', 'r', encoding="utf-8") as file:
+        url = file.read().split('\n')[-1].strip()
+
+    return url
