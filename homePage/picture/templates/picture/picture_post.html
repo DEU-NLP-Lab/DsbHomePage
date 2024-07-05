@@ -45,11 +45,11 @@
         background-color: lightblue;
       }
 
-      /* This is for the post items */
-      .post-item {
-        border-bottom: 1px dashed #ccc;
-        padding-bottom: 8px;
-      }
+      .nav-item:hover {
+          background-color: #2c5282;
+          color: white !important;
+        }
+
   </style>
 </head>
 <body>
@@ -60,10 +60,10 @@
           </a>
           <div class="hidden md:flex space-x-4">
             <!-- Navigation Links -->
-            <a href="{{ form_link }}" target="_blank" class="hover:bg-blue-700 px-3 py-2 rounded-md">모집 신청서</a>
-            <a href="/posts" class="hover:bg-blue-700 px-3 py-2 rounded-md">공지사항</a>
-            <a href="/picture" class="hover:bg-blue-700 px-3 py-2 rounded-md">활동사진</a>
-            <a href="/results" class="hover:bg-blue-700 px-3 py-2 rounded-md">결과물</a>
+            <a href="{{ form_link }}" target="_blank" class="nav-item hover:bg-blue-700 px-3 py-2 rounded-md">모집 신청서</a>
+            <a href="/posts" class="nav-item hover:bg-blue-700 px-3 py-2 rounded-md">공지사항</a>
+            <a href="/picture" class="nav-item hover:bg-blue-700 px-3 py-2 rounded-md">활동사진</a>
+            <a href="/results" class="nav-item hover:bg-blue-700 px-3 py-2 rounded-md">결과물</a>
           </div>
           <!-- Mobile Menu Button -->
           <button class="md:hidden text-white focus:outline-none">
