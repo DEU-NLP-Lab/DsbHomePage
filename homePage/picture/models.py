@@ -1,5 +1,5 @@
 from django.db import models
-from ckeditor_uploader.fields import RichTextUploadingField
+from django_ckeditor_5.fields import CKEditor5Field
 
 
 # Create your models here.
@@ -7,7 +7,7 @@ from ckeditor_uploader.fields import RichTextUploadingField
 class Picture(models.Model):
     title = models.CharField(max_length=30)
     # content = models.TextField()
-    content = RichTextUploadingField(blank=True, null=True, verbose_name='내용')
+    content = CKEditor5Field(config_name="extends", blank=True, null=True, verbose_name='내용')  # CKEditor 5 필드
 
     image = models.ImageField(upload_to='pictures/image/%Y/%m/%d', blank=False)
 
