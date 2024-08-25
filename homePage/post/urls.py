@@ -1,5 +1,5 @@
 from django.urls import path
-from . import views
+from post import views
 from .views import download_post_file
 
 urlpatterns = [

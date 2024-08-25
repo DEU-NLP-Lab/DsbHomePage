@@ -13,9 +13,12 @@
     <style>
 
       /* 추가 스타일 */
+      .nav-link:hover {
+            text-decoration: underline;
+      }
       .slide {
           display: none;
-          height: 1000px; /* 이미지의 높이를 고정합니다. 필요에 따라 조절 가능합니다. */
+          height: 500px; /* 이미지의 높이를 고정합니다. 필요에 따라 조절 가능합니다. */
           background-size: cover; /* 이미지가 div의 크기에 맞게 조정됩니다. */
           background-position: center; /* 이미지가 중앙에 위치하도록 합니다. */
       }
@@ -42,36 +45,25 @@
         background-color: lightblue;
       }
 
-
-      .slide {
-          display: none;
-          background-size: cover; /* 이미지가 div의 크기에 맞게 조정됩니다. */
-          background-position: center; /* 이미지가 중앙에 위치하도록 합니다. */
-      }
-
-      .slide img {
-          width: 100%;
-          height: 100%;
-          object-fit: cover; /* 이미지가 div에 맞춰 자르기 되도록 합니다. */
-      }
       .nav-item:hover {
           background-color: #2c5282;
           color: white !important;
         }
+
   </style>
 </head>
 <body>
     <nav class="bg-blue-800 p-4 text-white">
         <div class="container mx-auto flex justify-between items-center">
-          <a href="/" class="flex items-center nav-item">
-            <span class="font-bold text-2xl text-white-800">디지털스마트부산아카데미 동의대학교</span>
+          <a href="/" class="flex items-center">
+            <span class="font-bold text-2xl text-white-800">동의대학교 SW아카데미</span>
           </a>
           <div class="hidden md:flex space-x-4">
             <!-- Navigation Links -->
-            <a href="{{ form_link }}" target="_blank" class="nav-item hover:bg-blue-700 px-3 py-2 rounded-md">모집 신청서</a>
             <a href="/posts" class="nav-item hover:bg-blue-700 px-3 py-2 rounded-md">공지사항</a>
-            <a href="/picture" class="nav-item hover:bg-blue-700 px-3 py-2 rounded-md">활동사진</a>
-            <a href="/results" class="nav-item hover:bg-blue-700 px-3 py-2 rounded-md">결과물</a>
+            <a href="/picture" class="nav-item hover:bg-blue-700 px-3 py-2 rounded-md">포토 갤러리</a>
+            <a href="/results" class="nav-item hover:bg-blue-700 px-3 py-2 rounded-md">프로젝트</a>
+            <a href="/info" class="nav-item hover:bg-blue-700 px-3 py-2 rounded-md">사업단 소개</a>
           </div>
           <!-- Mobile Menu Button -->
           <button class="md:hidden text-white focus:outline-none">
@@ -83,23 +75,61 @@
       </nav>
     <div class="container mx-auto my-5 p-5 bg-white shadow-lg rounded">
         <div>
-            <div class="flex items-center justify-between border-b-2 border-blue-800 pb-2">
-              <h2 class="text-2xl font-bold text-blue-800">결과물</h2>
-            </div>
-
-            <div class="container mx-auto p-5 bg-white shadow-lg rounded-lg min-h-screen">
-                <div class="flex flex-col items-center justify-center">
-                    <div class="max-w-5xl w-full">
-                        <!-- 이미지 슬라이드가 있는 경우 -->
-                        {% for result in results %}
-                            <div class="slide">
-                                <img class="w-auto max-w-full h-auto mx-auto" src="{{ result.image.url }}" alt="활동 이미지" style="max-height: 110vh;">
-                            </div>
-                        {% endfor %}
-                    </div>
-                    <a class="absolute top-1/2 left-0 transform -translate-y-1/2 bg-blue-500 text-white p-1 cursor-pointer" onclick="moveSlide(-1)">&#10094;</a>
-                    <a class="absolute top-1/2 right-0 transform -translate-y-1/2 bg-blue-500 text-white p-1 cursor-pointer" onclick="moveSlide(1)">&#10095;</a>
+            <section class="container min-h-screen">
+                <div class="flex items-center justify-between border-b-2 border-blue-800 pb-2">
+                  <h2 class="text-2xl font-bold text-blue-800">프로젝트</h2>
                 </div>
+
+                <div class="album py-5 bg-light">
+                    <div class="container">
+                        <div class="row">
+
+                            <!-- 이 부분 반복해서 카드 만들기 -->
+                            {% for result in results %}
+
+                            <div class="col-md-4">
+                                <div class="card mb-4 shadow-sm">
+                                    <img class="card-img-top" src="{{ result.image.url }}" alt="Card image cap" />
+                                    <div class="card-body">
+                                        <p class="card-text">{{ result.title|safe }}</p>
+                                        <br/>
+                                        <div class="d-flex justify-content-between align-items-center">
+                                            <div class="btn-group">
+                                                <button type="button" class="btn btn-sm btn-outline-secondary"><a href="{{result.pk}}">자세히 보기</a></button>
+                                            </div>
+        <!--                                    <small class="text-muted">{{ result.created_at }}</small>-->
+                                            <small class="text-muted">{{ result.updated_at }}</small>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            {% endfor %}
+                        </div>
+                    </div>
+                </div>
+            </section>
+            <!-- Add margin-top for spacing and use flexbox for centering -->
+            <div class="pagination flex justify-center mt-8">
+              {% if results.has_previous %}
+                <a href="?page=1" class="mx-1">첫 페이지</a>
+                <a href="?page={{ results.previous_page_number }}" class="mx-1">이전 페이지</a>
+              {% endif %}
+
+              <!-- Show only up to 5 page numbers -->
+              {% for num in results.paginator.page_range %}
+                {% if num > results.number|add:'-3' and num < results.number|add:'3' %}
+                  {% if num == results.number %}
+                    <span class="current mx-1">{{ num }}</span>
+                  {% else %}
+                    <a href="?page={{ num }}" class="mx-1">{{ num }}</a>
+                  {% endif %}
+                {% endif %}
+              {% endfor %}
+
+              {% if results.has_next %}
+                <a href="?page={{ results.next_page_number }}" class="mx-1">다음 페이지</a>
+                <a href="?page={{ results.paginator.num_pages }}" class="mx-1">마지막 페이지</a>
+              {% endif %}
             </div>
         </div>
     </div>
@@ -122,33 +152,6 @@
             </div>
         </div>
     </footer>
-
-    <script>
-        let slideIndex = 0;
-        showSlides();
-
-        function moveSlide(n) {
-            slideIndex += n;
-            showSlides();
-        }
-
-        function showSlides() {
-            let i;
-            let slides = document.getElementsByClassName("slide");
-            if (slideIndex >= slides.length) slideIndex = 0;
-            if (slideIndex < 0) slideIndex = slides.length - 1;
-            for (i = 0; i < slides.length; i++) {
-                slides[i].style.display = "none";
-            }
-            slides[slideIndex].style.display = "block";
-        }
-
-        // 자동 슬라이드 기능
-        setInterval(() => {
-            slideIndex++;
-            showSlides();
-        }, 10000); // 10초 간격
-    </script>
 
     <!--부트스트랩-->
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>

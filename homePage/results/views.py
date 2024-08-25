@@ -14,3 +14,15 @@ def results_post(request):
             'results': results,
         },
     )
+
+
+def results_detail_page(request, pk):
+    result = Results.objects.get(pk=pk)
+
+    return render(
+        request,
+        'results_detail_page.html',
+        {
+            'result': result,
+        },
+    )

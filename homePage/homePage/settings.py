@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     'post',  # 게시판 앱 추가  ** 앱 추가 후 반드시 python manage.py makemigrations 후 python manage.py migrate 해야 db 적용
     'picture',  # 활동 사진 앱 추가,
     'results',  # 결과물 사진 앱 추가
+    'info',  # 사업단 소개 앱 추가
     'django_ckeditor_5',  # Text Editor
     # 'ckeditor',  # Text Editor
     # 'ckeditor_uploader',  # Text Editor
@@ -180,13 +181,11 @@ CKEDITOR_5_CONFIGS = {
                     'insertTable',],
         'image': {
             'toolbar': ['imageTextAlternative', '|', 'imageStyle:alignLeft',
-                        'imageStyle:alignRight', 'imageStyle:alignCenter', 'imageStyle:side',  '|'],
+                        'imageStyle:alignCenter', 'imageStyle:alignRight', '|'],
             'styles': [
-                'full',
-                'side',
                 'alignLeft',
-                'alignRight',
                 'alignCenter',
+                'alignRight',
             ]
 
         },
