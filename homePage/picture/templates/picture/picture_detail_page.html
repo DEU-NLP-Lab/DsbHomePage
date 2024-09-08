@@ -68,18 +68,21 @@
         margin-right: auto;
         text-align: left;
     }
+      span.font-bold:hover {
+        color: white !important;  /* Ensures the text stays white on hover */
+    }
   </style>
 </head>
 <body>
     <nav class="bg-blue-800 p-4 text-white">
         <div class="container mx-auto flex justify-between items-center">
           <a href="/" class="flex items-center">
-            <span class="font-bold text-2xl text-white-800">동의대학교 SW아카데미</span>
+            <span class="font-bold text-2xl">동의대학교 SW아카데미</span>
           </a>
           <div class="hidden md:flex space-x-4">
             <!-- Navigation Links -->
             <a href="/posts" class="nav-item hover:bg-blue-700 px-3 py-2 rounded-md">공지사항</a>
-            <a href="/picture" class="nav-item hover:bg-blue-700 px-3 py-2 rounded-md">포토 갤러리</a>
+            <a href="/picture" class="nav-item hover:bg-blue-700 px-3 py-2 rounded-md">갤러리</a>
             <a href="/results" class="nav-item hover:bg-blue-700 px-3 py-2 rounded-md">프로젝트</a>
             <a href="/info" class="nav-item hover:bg-blue-700 px-3 py-2 rounded-md">사업단 소개</a>
           </div>
@@ -104,7 +107,9 @@
                             <h1 class="fw-bolder my-3"><strong>{{picture.title}}</strong></h1>
                             <hr/>
                             <!-- Post meta content-->
-                            <div class="text-muted fst-italic my-3">{{ picture.updated_at|default:picture.created_at }}</div>
+                            <div class="text-muted fst-italic my-3">
+{#                                {{ picture.updated_at|default:picture.created_at }}#}
+                            </div>
                             <hr/>
                             <h1 class="my-3">　</h1>
                         </header>

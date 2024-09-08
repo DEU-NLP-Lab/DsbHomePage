@@ -49,19 +49,21 @@
           background-color: #2c5282;
           color: white !important;
         }
-
+      span.font-bold:hover {
+        color: white !important;  /* Ensures the text stays white on hover */
+    }
   </style>
 </head>
 <body>
     <nav class="bg-blue-800 p-4 text-white">
         <div class="container mx-auto flex justify-between items-center">
           <a href="/" class="flex items-center">
-            <span class="font-bold text-2xl text-white-800">동의대학교 SW아카데미</span>
+            <span class="font-bold text-2xl">동의대학교 SW아카데미</span>
           </a>
           <div class="hidden md:flex space-x-4">
             <!-- Navigation Links -->
             <a href="/posts" class="nav-item hover:bg-blue-700 px-3 py-2 rounded-md">공지사항</a>
-            <a href="/picture" class="nav-item hover:bg-blue-700 px-3 py-2 rounded-md">포토 갤러리</a>
+            <a href="/picture" class="nav-item hover:bg-blue-700 px-3 py-2 rounded-md">갤러리</a>
             <a href="/results" class="nav-item hover:bg-blue-700 px-3 py-2 rounded-md">프로젝트</a>
             <a href="/info" class="nav-item hover:bg-blue-700 px-3 py-2 rounded-md">사업단 소개</a>
           </div>
@@ -77,7 +79,7 @@
         <div>
             <section class="container min-h-screen">
                 <div class="flex items-center justify-between border-b-2 border-blue-800 pb-2">
-                  <h2 class="text-2xl font-bold text-blue-800">포토 갤러리</h2>
+                  <h2 class="text-2xl font-bold text-blue-800">갤러리</h2>
                 </div>
 
                 <div class="album py-5 bg-light">
@@ -98,7 +100,7 @@
                                                 <button type="button" class="btn btn-sm btn-outline-secondary"><a href="{{p.pk}}">자세히 보기</a></button>
                                             </div>
         <!--                                    <small class="text-muted">{{ p.created_at }}</small>-->
-                                            <small class="text-muted">{{ p.updated_at }}</small>
+                                            <!--<small class="text-muted">{{ p.updated_at }}</small>-->
                                         </div>
                                     </div>
                                 </div>

@@ -35,7 +35,7 @@
           <div class="hidden md:flex space-x-4">
             <!-- Navigation Links -->
             <a href="/posts" class="hover:bg-blue-700 px-3 py-2 rounded-md">공지사항</a>
-            <a href="/picture" class="hover:bg-blue-700 px-3 py-2 rounded-md">포토 갤러리</a>
+            <a href="/picture" class="hover:bg-blue-700 px-3 py-2 rounded-md">갤러리</a>
             <a href="/results" class="hover:bg-blue-700 px-3 py-2 rounded-md">프로젝트</a>
             <a href="/info" class="hover:bg-blue-700 px-3 py-2 rounded-md">사업단 소개</a>
           </div>
@@ -71,7 +71,7 @@
                         <li class="border-b border-dashed border-gray-300 pb-3">
                             <a href="/{{ p.pk }}" class="hover:text-blue-600">{{ p.title }}</a>
                             <span class="text-sm text-gray-600 float-right">
-                                {{ p.updated_at|default:p.created_at }}
+{#                                {{ p.updated_at|default:p.created_at }}#}
                             </span>
                         </li>
                     {% endfor %}
@@ -80,7 +80,7 @@
 
             <section class="container mx-auto">
                 <div class="flex items-center justify-between border-b-2 border-blue-800 pb-2">
-                  <h2 class="text-2xl font-bold text-blue-800">포토 갤러리</h2>
+                  <h2 class="text-2xl font-bold text-blue-800">갤러리</h2>
                   <a href="/picture" class="text-blue-600 hover:text-blue-800 float-right font-semibold">MORE +</a>
                 </div>
 
