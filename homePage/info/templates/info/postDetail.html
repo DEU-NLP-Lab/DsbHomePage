@@ -24,17 +24,12 @@
           height: 100%;
           object-fit: cover; /* 이미지가 div에 맞춰 자르기 되도록 합니다. */
       }
-          /* 기본적으로 이미지가 중앙에 정렬되도록 설정 */
+      /* 기본적으로 이미지가 중앙에 정렬되도록 설정 */
     .image.image_resized {
-        display: block;
-        margin-left: auto;
-        margin-right: auto;
-        text-align: center;
-    }
-    .image {
-        display: block;
-        margin-left: auto;
-        margin-right: auto;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 100%;
         text-align: center;
     }
 
@@ -53,14 +48,6 @@
     }
 
     /* 가운데 정렬 */
-
-    .image.image-style-align-center {
-        display: block;
-        margin-left: auto;
-        margin-right: auto;
-        text-align: center;
-    }
-
     .image.image-style-align-center.image_resized {
         display: flex;
         justify-content: center;

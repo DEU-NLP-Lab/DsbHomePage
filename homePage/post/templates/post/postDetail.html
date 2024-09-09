@@ -26,9 +26,10 @@
       }
           /* 기본적으로 이미지가 중앙에 정렬되도록 설정 */
     .image.image_resized {
-        display: block;
-        margin-left: auto;
-        margin-right: auto;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 100%;
         text-align: center;
     }
 
@@ -41,11 +42,19 @@
     }
 
     /* 가운데 정렬 */
-    .image.image_resized.image-style-align-center {
-        display: block;
-        margin-left: auto;
-        margin-right: auto;
+
+    .image.image-style-align-center.image_resized {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 100%;
         text-align: center;
+    }
+
+    .image img {
+        max-width: 100%;
+        height: auto;
+        object-fit: contain; /* Ensure the image maintains its aspect ratio */
     }
 
     /* 왼쪽 정렬 */
