@@ -10,7 +10,8 @@ from urllib.parse import urlparse, parse_qs
 
 # Create your views here.
 def index(request):
-    posts = Post.objects.all().order_by('-pk')[:10]
+    # 메인 페이지에는 고정글을 우선 보여주고, 그 다음 최신글 순으로 정렬
+    posts = Post.objects.all().order_by('-is_pinned', '-pk')[:10]
     pictures = Picture.objects.all()
 
     youtube_link = read_youtube_link()
@@ -29,7 +30,8 @@ def index(request):
 
 
 def posts(request):
-    post_list = Post.objects.all().order_by('-pk')  # or however you want to order them
+    # 전체 게시글 목록에서도 고정글을 우선 보여주고, 그 다음 최신글 순으로 정렬
+    post_list = Post.objects.all().order_by('-is_pinned', '-pk')
     paginator = Paginator(post_list, 20)  # 20 posts per page
 
     page_number = request.GET.get('page', 1)

@@ -8,6 +8,7 @@ class Post(models.Model):
     title = models.CharField(max_length=30, verbose_name='제목')
     # content = models.TextField()
     content = CKEditor5Field(config_name="extends", blank=True, null=True, verbose_name='내용')  # CKEditor 5 필드
+    is_pinned = models.BooleanField(default=False)  # 고정 게시물 여부
 
     file = models.FileField(
         upload_to='posts/files/%Y/%m/%d',
@@ -18,6 +19,9 @@ class Post(models.Model):
 
     created_at = models.DateTimeField(auto_now_add=True, verbose_name='작성일')
     updated_at = models.DateTimeField(auto_now=True, verbose_name='최근 수정일')
+
+    class Meta:
+        ordering = ['-is_pinned', '-created_at']  # 고정글 우선, 그 다음 최신순
 
     # author: 추후 작성 예정
     
