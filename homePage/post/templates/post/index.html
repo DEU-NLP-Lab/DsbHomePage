@@ -24,9 +24,81 @@
           height: 100%;
           object-fit: cover; /* 이미지가 div에 맞춰 자르기 되도록 합니다. */
       }
+      .popup {
+        display: none;
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%) scale(0.7);
+        background-color: white;
+        padding: 0;
+        border-radius: 15px;
+        box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+        z-index: 1000;
+        opacity: 0;
+        transition: all 0.3s ease-in-out;
+    }
+
+    .popup.show {
+        opacity: 1;
+        transform: translate(-50%, -50%) scale(1);
+    }
+
+    .popup-image {
+        width: auto;
+        max-width: 640px;  /* 이미지 최대 크기 설정 */
+        height: auto;
+        border-radius: 15px;
+        display: block;
+    }
+
+    .popup-overlay {
+        display: none;
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0,0,0,0.5);
+        z-index: 999;
+        opacity: 0;
+        transition: opacity 0.3s ease-in-out;
+    }
+
+    .popup-overlay.show {
+        opacity: 1;
+    }
+
+    .close-btn {
+        position: absolute;
+        right: -15px;
+        top: -15px;
+        width: 30px;
+        height: 30px;
+        background-color: white;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+        font-size: 20px;
+        box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+        transition: all 0.2s ease;
+    }
+
+    .close-btn:hover {
+        background-color: #f0f0f0;
+        transform: scale(1.1);
+    }
   </style>
 </head>
-<body>    
+<body>
+    <!-- 팝업 오버레이와 팝업창 -->
+    <div class="popup-overlay" id="overlay"></div>
+    <div class="popup" id="popup">
+        <span class="close-btn" onclick="closePopup()">&times;</span>
+        <img class="popup-image" src="{% static '/image/popup.png' %}" alt="팝업 내용">
+    </div>
     <nav class="bg-blue-800 p-4 text-white">
         <div class="container mx-auto flex justify-between items-center">
           <a href="/" class="flex items-center">
@@ -49,7 +121,7 @@
       </nav>
     <div class="container mx-auto my-5 p-5 bg-white shadow-lg rounded">
         <div>
-            <img class="w-full" src="{% static '/image/banner/banner2.png' %}" alt="로고 이미지"/>
+            <img class="w-full" src="{% static '/image/banner/6_banner.png' %}" alt="로고 이미지"/>
         </div>
     </div>
 
@@ -181,6 +253,37 @@
             slideIndex++;
             showSlides();
         }, 5000); // 3초 간격
+
+        // 페이지 로드 시 팝업 표시
+        window.onload = function() {
+            setTimeout(showPopup, 100);
+        }
+
+        function showPopup() {
+            const overlay = document.getElementById('overlay');
+            const popup = document.getElementById('popup');
+
+            overlay.style.display = 'block';
+            popup.style.display = 'block';
+
+            void popup.offsetWidth;
+
+            overlay.classList.add('show');
+            popup.classList.add('show');
+        }
+
+        function closePopup() {
+            const overlay = document.getElementById('overlay');
+            const popup = document.getElementById('popup');
+
+            overlay.classList.remove('show');
+            popup.classList.remove('show');
+
+            setTimeout(() => {
+                overlay.style.display = 'none';
+                popup.style.display = 'none';
+            }, 300);
+        }
     </script>
 </body>
 </html>

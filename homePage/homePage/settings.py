@@ -24,6 +24,7 @@ SECRET_KEY = 'django-insecure-#j$v6i5$+l_e6^82-hr(2yqi=u020k2fcx+r88e-7loe0jmfbf
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
+# ALLOWED_HOSTS = ['*']  # 모든 곳에서 접속 가능하도록 함
 ALLOWED_HOSTS = ['*']  # 모든 곳에서 접속 가능하도록 함
 # ALLOWED_HOSTS = '*'
 
