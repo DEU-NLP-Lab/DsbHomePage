@@ -179,7 +179,7 @@ CKEDITOR_5_CONFIGS = {
         'code','subscript', 'superscript', 'highlight', '|', 'codeBlock', 'sourceEditing', 'insertImage',
                     'bulletedList', 'numberedList', 'todoList', '|',  'blockQuote', 'imageUpload', '|',
                     'fontSize', 'fontFamily', 'fontColor', 'fontBackgroundColor', 'mediaEmbed', 'removeFormat',
-                    'insertTable',],
+                    'insertTable','|', 'alignment', '|'],
         'image': {
             'toolbar': ['imageTextAlternative', '|', 'imageStyle:alignLeft',
                         'imageStyle:alignCenter', 'imageStyle:alignRight', '|'],
@@ -217,5 +217,8 @@ CKEDITOR_5_CONFIGS = {
             'startIndex': 'true',
             'reversed': 'true',
         }
+    },
+    'alignment': {
+        'options': ['left', 'right', 'center', 'justify']
     }
 }
