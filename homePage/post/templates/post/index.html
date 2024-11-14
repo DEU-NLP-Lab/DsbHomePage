@@ -46,7 +46,7 @@
 
     .popup-image {
         width: auto;
-        max-width: 640px;  /* 이미지 최대 크기 설정 */
+        max-width: 600px;  /* 이미지 최대 크기 설정 */
         height: auto;
         border-radius: 15px;
         display: block;
@@ -90,6 +90,22 @@
         background-color: #f0f0f0;
         transform: scale(1.1);
     }
+
+    .form-checkbox {
+        appearance: none;
+        border: 1px solid #cbd5e0;
+        border-radius: 0.25rem;
+        width: 1rem;
+        height: 1rem;
+        background-color: white;
+        cursor: pointer;
+    }
+
+    .form-checkbox:checked {
+        background-color: #3b82f6;
+        border-color: #3b82f6;
+        background-image: url("data:image/svg+xml,%3csvg viewBox='0 0 16 16' fill='white' xmlns='http://www.w3.org/2000/svg'%3e%3cpath d='M5.707 7.293a1 1 0 0 0-1.414 1.414l2 2a1 1 0 0 0 1.414 0l4-4a1 1 0 0 0-1.414-1.414L7 8.586 5.707 7.293z'/%3e%3c/svg%3e");
+    }
   </style>
 </head>
 <body>
@@ -97,7 +113,13 @@
     <div class="popup-overlay" id="overlay"></div>
     <div class="popup" id="popup">
         <span class="close-btn" onclick="closePopup()">&times;</span>
-        <img class="popup-image" src="{% static '/image/popup.png' %}" alt="팝업 내용">
+        <img class="popup-image" src="{% static '/image/popup_6.png' %}" alt="팝업 내용">
+        <div class="flex items-center justify-end p-2 bg-gray-100 rounded-b-lg">
+            <label class="flex items-center cursor-pointer">
+                <input type="checkbox" id="noShowToday" class="form-checkbox mr-2">
+                <span class="text-sm text-gray-600">오늘 하루 보지 않기</span>
+            </label>
+        </div>
     </div>
     <nav class="bg-blue-800 p-4 text-white">
         <div class="container mx-auto flex justify-between items-center">
@@ -260,9 +282,26 @@
             showSlides();
         }, 5000); // 3초 간격
 
+        // 쿠키 설정 함수
+        function setPopupCookie(name, value, expiredays) {
+            const date = new Date();
+            date.setDate(date.getDate() + expiredays);
+            document.cookie = name + '=' + value + ';expires=' + date.toUTCString() + ';path=/';
+        }
+
+        // 쿠키 가져오기 함수
+        function getPopupCookie(name) {
+            const value = document.cookie.match('(^|;) ?' + name + '=([^;]*)(;|$)');
+            return value ? value[2] : null;
+        }
+
         // 페이지 로드 시 팝업 표시
         window.onload = function() {
-            setTimeout(showPopup, 100);
+            // 쿠키 체크
+            const popupHidden = getPopupCookie('popupHidden');
+            if (!popupHidden) {
+                setTimeout(showPopup, 100);
+            }
         }
 
         function showPopup() {
@@ -281,6 +320,12 @@
         function closePopup() {
             const overlay = document.getElementById('overlay');
             const popup = document.getElementById('popup');
+            const noShowToday = document.getElementById('noShowToday');
+
+            // 체크박스가 체크되어 있으면 쿠키 설정
+            if (noShowToday.checked) {
+                setPopupCookie('popupHidden', 'true', 1); // 1일 동안 숨기기
+            }
 
             overlay.classList.remove('show');
             popup.classList.remove('show');
