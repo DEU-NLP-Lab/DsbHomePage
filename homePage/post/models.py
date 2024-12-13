@@ -5,7 +5,7 @@ import os
 
 
 class Post(models.Model):
-    title = models.CharField(max_length=30, verbose_name='제목')
+    title = models.CharField(max_length=40, verbose_name='제목')
     # content = models.TextField()
     content = CKEditor5Field(config_name="extends", blank=True, null=True, verbose_name='내용')  # CKEditor 5 필드
     is_pinned = models.BooleanField(default=False)  # 고정 게시물 여부
