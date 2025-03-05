@@ -1,6 +1,6 @@
 from django.db import models
 from django_ckeditor_5.fields import CKEditor5Field
-
+from .validators import *
 
 # Create your models here.
 
@@ -10,6 +10,13 @@ class Picture(models.Model):
     content = CKEditor5Field(config_name="extends", blank=True, null=True, verbose_name='내용')  # CKEditor 5 필드
 
     image = models.ImageField(upload_to='pictures/image/%Y/%m/%d', blank=False)
+
+    file = models.FileField(
+        upload_to='pictures/files/%Y/%m/%d',
+        null=True,
+        validators=[validate_file_extension, ],
+        blank=True
+    )
 
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
