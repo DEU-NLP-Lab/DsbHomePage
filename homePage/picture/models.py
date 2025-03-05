@@ -11,12 +11,12 @@ class Picture(models.Model):
 
     image = models.ImageField(upload_to='pictures/image/%Y/%m/%d', blank=False)
 
-    file = models.FileField(
-        upload_to='pictures/files/%Y/%m/%d',
-        null=True,
-        validators=[validate_file_extension, ],
-        blank=True
-    )
+    # file = models.FileField(
+    #     upload_to='pictures/files/%Y/%m/%d',
+    #     null=True,
+    #     validators=[validate_file_extension, ],
+    #     blank=True
+    # )
 
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
