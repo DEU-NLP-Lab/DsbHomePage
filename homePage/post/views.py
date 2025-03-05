@@ -12,7 +12,7 @@ from urllib.parse import urlparse, parse_qs
 def index(request):
     # 메인 페이지에는 고정글을 우선 보여주고, 그 다음 최신글 순으로 정렬
     posts = Post.objects.all().order_by('-is_pinned', '-pk')[:10]
-    pictures = Picture.objects.all()
+    pictures = Picture.objects.all().order_by('-created_at', '-pk')
 
     youtube_link = read_youtube_link()
     form_link = read_form_link()
