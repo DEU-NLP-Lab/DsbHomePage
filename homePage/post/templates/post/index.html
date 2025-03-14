@@ -208,18 +208,42 @@
 
         <!-- 인터뷰 영상 및 위치 정보 -->
         <div class="my-5 p-5 grid grid-cols-2 gap-4 mt-4">
-            <section class="container mx-auto ">
-                <div class="flex items-center justify-between border-b-2 border-blue-800 pb-2">
-                  <h2 class="text-2xl font-bold text-blue-800">인터뷰</h2>
-                </div>
+            <!-- 인터뷰 섹션 -->
+            <section class="container mx-auto">
+              <div class="flex items-center justify-between border-b-2 border-blue-800 pb-2">
+                <h2 class="text-2xl font-bold text-blue-800">인터뷰</h2>
+              </div>
 
-                <div class="bg-white p-4 shadow rounded-lg">
-                    <div class="relative w-full h-96 flex justify-center items-center">
-                        <!-- 유튜브 영상의 iframe. src 부분에 실제 유튜브 영상 링크를 넣어야 합니다. -->
-                        <iframe class="absolute" width="100%" height="100%" src="https://www.youtube.com/embed/{{ youtube_link }}" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-                    </div>
+              <div class="bg-white p-4 shadow rounded-lg">
+                <!-- 슬라이드 컨테이너 -->
+                <div class="relative w-full flex justify-center items-center">
+                  <div id="videoCarousel" class="w-full">
+                    {% for video in videos %}
+                      <!-- 슬라이드 하나 -->
+                      <div class="video-slide" style="display: {% if forloop.first %}block{% else %}none{% endif %};">
+                        <!-- 16:9 비율 컨테이너 -->
+                        <div class="relative w-full pb-[56.25%]">
+                          <!-- enablejsapi=1 파라미터와 고유 id(player{{ forloop.counter0 }})가 중요 -->
+                          <iframe
+                            id="player{{ forloop.counter0 }}"
+                            class="absolute top-0 left-0 w-full h-full"
+                            src="https://www.youtube.com/embed/{{ video }}?enablejsapi=1"
+                            frameborder="0"
+                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                            allowfullscreen>
+                          </iframe>
+                        </div>
+                      </div>
+                    {% endfor %}
+                  </div>
+                  <!-- 좌우 화살표 -->
+                  <a class="absolute top-1/2 left-0 transform -translate-y-1/2 bg-blue-500 text-white p-1 cursor-pointer" onclick="moveVideoSlide(-1)">&#10094;</a>
+                  <a class="absolute top-1/2 right-0 transform -translate-y-1/2 bg-blue-500 text-white p-1 cursor-pointer" onclick="moveVideoSlide(1)">&#10095;</a>
                 </div>
+              </div>
             </section>
+
+
             <section class="container mx-auto">
                 <div class="flex items-center justify-between border-b-2 border-blue-800 pb-2">
                   <h2 class="text-2xl font-bold text-blue-800">찾아오시는 길</h2>
@@ -256,7 +280,8 @@
     </footer>
 
 
-
+    <!-- YouTube IFrame API 로드 -->
+    <script src="https://www.youtube.com/iframe_api"></script>
 
     <script>
         let slideIndex = 0;
@@ -273,16 +298,16 @@
             if (slideIndex >= slides.length) slideIndex = 0;
             if (slideIndex < 0) slideIndex = slides.length - 1;
             for (i = 0; i < slides.length; i++) {
-                slides[i].style.display = "none";  
+                slides[i].style.display = "none";
             }
-            slides[slideIndex].style.display = "block"; 
+            slides[slideIndex].style.display = "block";
         }
 
         // 자동 슬라이드 기능
         setInterval(() => {
             slideIndex++;
             showSlides();
-        }, 5000); // 3초 간격
+        }, 5000); // 5초 간격
 
         // 쿠키 설정 함수
         function setPopupCookie(name, value, expiredays) {
@@ -337,6 +362,42 @@
                 popup.style.display = 'none';
             }, 300);
         }
+
+        /*--- 영상 슬라이드 관련 수정 부분 ---*/
+        let videoSlideIndex = 0;
+        showVideoSlides();
+
+        function moveVideoSlide(n) {
+            const slides = document.getElementsByClassName("video-slide");
+            if (slides.length > 0) {
+                const currentSlide = slides[videoSlideIndex];
+                const iframe = currentSlide.querySelector("iframe");
+                if (iframe) {
+                    // 현재 영상의 src를 재설정하여 영상 재생을 초기 상태로 만듭니다.
+                    const currentSrc = iframe.getAttribute("src");
+                    iframe.setAttribute("src", currentSrc);
+                }
+            }
+            videoSlideIndex += n;
+            showVideoSlides();
+        }
+
+        function showVideoSlides() {
+            const slides = document.getElementsByClassName("video-slide");
+            if (videoSlideIndex >= slides.length) videoSlideIndex = 0;
+            if (videoSlideIndex < 0) videoSlideIndex = slides.length - 1;
+            for (let i = 0; i < slides.length; i++) {
+                slides[i].style.display = "none";
+            }
+            slides[videoSlideIndex].style.display = "block";
+        }
+
+        // 자동 슬라이드 기능이 필요하면 아래 주석을 해제하세요.
+        // setInterval(() => {
+        //   videoSlideIndex++;
+        //   showVideoSlides();
+        // }, 5000);
     </script>
+
 </body>
 </html>

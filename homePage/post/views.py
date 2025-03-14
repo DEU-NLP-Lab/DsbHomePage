@@ -10,11 +10,10 @@ from urllib.parse import urlparse, parse_qs
 
 # Create your views here.
 def index(request):
-    # 메인 페이지에는 고정글을 우선 보여주고, 그 다음 최신글 순으로 정렬
     posts = Post.objects.all().order_by('-is_pinned', '-pk')[:10]
     pictures = Picture.objects.all().order_by('-created_at', '-pk')
 
-    youtube_link = read_youtube_link()
+    videos = read_youtube_links()  # 여러 영상 링크 읽기
     form_link = read_form_link()
 
     return render(
@@ -23,10 +22,11 @@ def index(request):
         {
             'posts': posts,
             'picture': pictures,
-            'youtube_link': youtube_link,
+            'videos': videos,  # 템플릿에서는 videos 변수로 반복 처리
             'form_link': form_link
         },
     )
+
 
 
 def posts(request):
@@ -101,17 +101,19 @@ def download_post_file(request, post_id):
         return Http404("File does not exist")
 
 
-def read_youtube_link():
+def read_youtube_links():
+    video_ids = []
     with open('linkSetting/youtube.txt', 'r', encoding="utf-8") as file:
-        url = file.read().split('\n')[-1].strip()
-
-    # URL에서 쿼리 파라미터 추출
-    parsed_url = urlparse(url)
-
-    query_params = parse_qs(parsed_url.query)
-
-    # 'v' 파라미터 값 반환
-    return query_params.get('v', [None])[0]
+        lines = file.readlines()  # 모든 줄을 읽음
+    for line in reversed(lines):  # 역순으로 순회: 최신 링크가 먼저 처리됨
+        url = line.strip()
+        if url:  # 빈 줄은 무시
+            parsed_url = urlparse(url)
+            query_params = parse_qs(parsed_url.query)
+            video_id = query_params.get('v', [None])[0]
+            if video_id:
+                video_ids.append(video_id)
+    return video_ids
 
 
 def read_form_link():
