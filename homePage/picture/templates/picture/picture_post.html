@@ -8,51 +8,55 @@
     <link rel="shortcut icon" type="image/x-icon" href="https://www.deu.ac.kr/Upload/www/favicon/2018/1213091943440.ico">
 
     <!--부트스트랩-->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css"
+          integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2"
+          crossorigin="anonymous">
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
-
       /* 추가 스타일 */
       .nav-link:hover {
-            text-decoration: underline;
+        text-decoration: underline;
       }
       .slide {
-          display: none;
-          height: 500px; /* 이미지의 높이를 고정합니다. 필요에 따라 조절 가능합니다. */
-          background-size: cover; /* 이미지가 div의 크기에 맞게 조정됩니다. */
-          background-position: center; /* 이미지가 중앙에 위치하도록 합니다. */
+        display: none;
+        height: 500px; /* 이미지의 높이를 고정합니다. 필요에 따라 조절 가능합니다. */
+        background-size: cover; /* 이미지가 div의 크기에 맞게 조정됩니다. */
+        background-position: center; /* 이미지가 중앙에 위치하도록 합니다. */
       }
-
       .slide img {
-          width: 100%;
-          height: 100%;
-          object-fit: cover; /* 이미지가 div에 맞춰 자르기 되도록 합니다. */
+        width: 100%;
+        height: 100%;
+        object-fit: cover; /* 이미지가 div에 맞춰 자르기 되도록 합니다. */
       }
-
       .pagination a, .pagination .current {
         padding: 5px 10px;
         margin: 2px;
         border: 1px solid blue;
         text-decoration: none;
       }
-
       .pagination .current {
         background-color: blue;
         color: white;
       }
-
       .pagination a:hover {
         background-color: lightblue;
       }
-
       .nav-item:hover {
-          background-color: #2c5282;
-          color: white !important;
-        }
+        background-color: #2c5282;
+        color: white !important;
+      }
       span.font-bold:hover {
         color: white !important;  /* Ensures the text stays white on hover */
-    }
-  </style>
+      }
+
+      /* 카드 이미지를 일정한 높이로 고정하여 동일하게 보여주는 스타일 */
+      .card-img-top {
+        width: 100%;
+        height: 200px; /* 원하는 높이로 조정 */
+        object-fit: cover;
+        object-position: center;
+      }
+    </style>
 </head>
 <body>
     <nav class="bg-blue-800 p-4 text-white">
@@ -70,11 +74,12 @@
           <!-- Mobile Menu Button -->
           <button class="md:hidden text-white focus:outline-none">
             <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/>
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                    d="M4 6h16M4 12h16M4 18h16"/>
             </svg>
           </button>
         </div>
-      </nav>
+    </nav>
     <div class="container mx-auto my-5 p-5 bg-white shadow-lg rounded">
         <div>
             <section class="container min-h-screen">
@@ -85,10 +90,8 @@
                 <div class="album py-5 bg-light">
                     <div class="container">
                         <div class="row">
-
                             <!-- 이 부분 반복해서 카드 만들기 -->
                             {% for p in pictures %}
-
                             <div class="col-md-4">
                                 <div class="card mb-4 shadow-sm">
                                     <img class="card-img-top" src="{{ p.image.url }}" alt="Card image cap" />
@@ -97,10 +100,10 @@
                                         <br/>
                                         <div class="d-flex justify-content-between align-items-center">
                                             <div class="btn-group">
-                                                <button type="button" class="btn btn-sm btn-outline-secondary"><a href="{{p.pk}}">자세히 보기</a></button>
+                                                <button type="button" class="btn btn-sm btn-outline-secondary">
+                                                    <a href="{{p.pk}}">자세히 보기</a>
+                                                </button>
                                             </div>
-        <!--                                    <small class="text-muted">{{ p.created_at }}</small>-->
-                                            <!--<small class="text-muted">{{ p.updated_at }}</small>-->
                                         </div>
                                     </div>
                                 </div>
@@ -140,12 +143,11 @@
         <div class="container mx-auto my-5 p-5 bg-white shadow-lg rounded">
             <!-- 개인정보처리방침 링크 -->
             <div class="py-2 text-left">
-                <a href="https://www.deu.ac.kr/www/content/61" class="text-sm text-blue-600 hover:text-blue-800" target="_blank" rel="noopener noreferrer">개인정보처리방침</a>
+                <a href="https://www.deu.ac.kr/www/content/61" class="text-sm text-blue-600 hover:text-blue-800"
+                   target="_blank" rel="noopener noreferrer">개인정보처리방침</a>
             </div>
-
             <!-- 구분선 -->
             <hr class="my-2 border-gray-300" />
-
             <!-- 푸터 텍스트 내용 -->
             <div class="text-sm text-gray-600 text-left">
                 <span>47340 부산광역시 부산진구 엄광로 176 (가야동)</span><br>
@@ -156,8 +158,14 @@
     </footer>
 
     <!--부트스트랩-->
-    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.min.js" integrity="sha384-w1Q4orYjBQndcko6MimVbzY0tgp4pWB4lZ7lr30WKz0vr/aWKhXdBNmNb5D92v7s" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
+            integrity="sha384-DfX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2"
+            crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"
+            integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN"
+            crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.min.js"
+            integrity="sha384-w1Q4orYjBQndcko6MimVbzY0tgp4pWB4lZ7lr30WKz0vr/aWKhXdBNmNb5D92v7s"
+            crossorigin="anonymous"></script>
 </body>
 </html>
